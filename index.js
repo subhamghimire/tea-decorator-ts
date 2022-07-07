@@ -7,8 +7,8 @@ class TeaDecorator {
     getCost() {
         return this.decoratedTea.getCost();
     }
-    getIngredients(ingredients) {
-        return this.decoratedTea.getIngredients(ingredients);
+    getIngredients() {
+        return this.decoratedTea.getIngredients();
     }
 }
 class WithMilk extends TeaDecorator {
@@ -20,30 +20,19 @@ class WithMilk extends TeaDecorator {
     getPrice() {
         return super.getCost() + 5;
     }
-    getIngredient(ingredients) {
-        return super.getIngredients([...ingredients, "milk"]);
+    getIngredient() {
+        return [...super.getIngredients(), "milk"];
     }
 }
 class SimpleTea {
     getCost() {
         return 10;
     }
-    getIngredients(ingredients) {
-        return ingredients;
-    }
-}
-class SugarFreeTea {
-    getCost() {
-        return 5;
-    }
-    getIngredients(ingredients) {
-        return ingredients;
+    getIngredients() {
+        return ["tea", "milk", "water", "sugar"];
     }
 }
 const tea = new WithMilk(new SimpleTea());
 console.log(tea.getPrice());
-console.log(tea.getIngredient(["tea", "sugar", "water"]));
-const sugarFreetea = new WithMilk(new SugarFreeTea());
-console.log(sugarFreetea.getPrice());
-console.log(sugarFreetea.getIngredient(["tea", "water"]));
+console.log(tea.getIngredient());
 //# sourceMappingURL=index.js.map

@@ -1,7 +1,7 @@
 //tea
 interface ITea {
   getCost(): number;
-  getIngredients(ingredients: string[]): string[];
+  getIngredients(): string[];
 }
 
 //decorator
@@ -12,8 +12,8 @@ abstract class TeaDecorator implements ITea {
     return this.decoratedTea.getCost();
   }
 
-  getIngredients(ingredients: string[]): string[] {
-    return this.decoratedTea.getIngredients(ingredients);
+  getIngredients(): string[] {
+    return this.decoratedTea.getIngredients();
   }
 }
 
@@ -26,8 +26,8 @@ class WithMilk extends TeaDecorator {
     return super.getCost() + 5;
   }
 
-  getIngredient(ingredients: string[]) {
-    return super.getIngredients([...ingredients, "milk"]);
+  getIngredient() {
+    return [...super.getIngredients(), "milk"];
   }
 }
 
@@ -36,25 +36,11 @@ class SimpleTea implements ITea {
     return 10;
   }
 
-  getIngredients(ingredients: string[]) {
-    return ingredients;
+  getIngredients() {
+    return ["tea", "milk", "water", "sugar"];
   }
 }
 
-// class SugarFreeTea implements ITea {
-//   getCost(): number {
-//     return 5;
-//   }
-
-//   getIngredients(ingredients: string[]) {
-//     return ingredients;
-//   }
-// }
-
 const tea = new WithMilk(new SimpleTea());
 console.log(tea.getPrice());
-console.log(tea.getIngredient(["tea", "sugar", "water"]));
-
-// const sugarFreetea = new WithMilk(new SugarFreeTea());
-// console.log(sugarFreetea.getPrice());
-// console.log(sugarFreetea.getIngredient(["tea", "water"]));
+console.log(tea.getIngredient());
